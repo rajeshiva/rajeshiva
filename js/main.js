@@ -204,13 +204,17 @@ $(document).ready(function ($) {
 
 });
 
+$('.work-items .items').scroll(function (event) {
+	event.preventDefault();
+})
+
 $('.work-items .work-nav').click(function (event) {
 	const workWidth = $('.work-item')[0].offsetWidth + 10;
 	const leftPos = $('.work-items .items').scrollLeft();
 	let scrollWidth = 200;
 	if (event.target.className.includes('right')) {
 		scrollWidth = leftPos + workWidth;
-	}else{
+	} else {
 		scrollWidth = leftPos - workWidth;
 	}
 	$('.work-items .items').animate({ scrollLeft: scrollWidth }, 500);
