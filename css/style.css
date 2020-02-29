@@ -11477,7 +11477,7 @@ textarea.form-control {
 }
 
 .work-item{
-  height: calc(100% + 10px);
+  height: calc(100% - 10px);
   min-width: 100%;
   padding: 10px;
   margin: 5px;
