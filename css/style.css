@@ -11446,3 +11446,57 @@ textarea.form-control {
     transform: translateX(10);
   }
 }
+
+.scroll-indicator:hover,.work-nav:hover{
+  cursor: pointer;
+  color: #fff;
+}
+
+.work-items {
+  min-height: 250px;
+}
+
+.work-nav{
+  text-align: center;
+  align-self: center;
+}
+
+.work-items .items{
+  display: flex;
+  overflow-x: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.work-items .items::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.work-items .items {
+  -ms-overflow-style: none;
+}
+
+.work-item{
+  height: calc(100% + 10px);
+  min-width: 100%;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #1f1f1f;
+}
+
+@media (min-width: 768px){
+  .work-item {
+    min-width: 50%;
+  }
+}
+
+.work-item ul {
+  padding-left: 10px;
+  list-style-type: none;
+}
+
+.work-item label{
+  color: #8c8c8c;
+}
