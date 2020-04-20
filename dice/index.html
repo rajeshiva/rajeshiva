@@ -14,9 +14,8 @@
             height: calc(100% - 16px);
         }
 
-        .show,
-        .run {
-            height: 50%;
+        .show {
+            height: 66%;
         }
 
         .run {
@@ -37,7 +36,7 @@
             font-family: sans-serif;
             width: 100%;
             text-align: center;
-            height: 80%;
+            height: 50%;
         }
 
         .dots {
@@ -48,11 +47,65 @@
             font-family: cursive;
             line-height: 0px;
         }
+
+        .history {
+            height: 35%;
+            overflow: auto;
+        }
+
+        button.removeLast {
+            float: right;
+        }
+
+        div#currentName {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .playerSetup {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0px;
+            bottom: 0;
+            background-color: white;
+            z-index: 100;
+            padding: 30px;
+        }
+
+        .playerSetup div {
+            text-align: center;
+            padding: 20px;
+        }
     </style>
 </head>
 
 <body>
+    <div class="playerSetup" id="playerSetup">
+        <div class="input">
+            <label>Player Name : </label>
+            <input type="text" name="playerName" id="playerName" onkeydown="add(this)">
+        </div>
+        <div class="addbtn">
+            <button onclick="addPlayer()">Add</button>
+        </div>
+        <div class="list">
+            <ol id="playerList">
+
+            </ol>
+        </div>
+        <div class="removebtn">
+            <button onclick="removePlayer()">Remove</button>
+        </div>
+        <div class="submitbtn">
+            <button onclick="startGame()">Start</button>
+        </div>
+    </div>
     <div class="show">
+        <div class="history">
+            <pre id="history"></pre>
+        </div>
         <div id="last">
             Last Number: <span id="lastNum"></span>&emsp;
             Current Number: <span id="currentNum"></span>
@@ -66,11 +119,30 @@
             </div>
         </div>
     </div>
-    <button class="run" onclick="getNum()">
-        Run
-    </button>
+    <div class="currentPlayer">
+        <pre id="currentPlayer">
+
+        </pre>
+    </div>
+    <div class="buttons">
+        <button class="reset" onclick="resetLastPlayerScore()">
+            Reset Player
+        </button>
+        <button class="removeLast" onclick="removeLast()">
+            Remove Last
+        </button>
+        <button class="run" onclick="getNum()">
+            Run
+        </button>
+    </div>
+
     <script>
+        const countiuePoints = [1, 6, 12];
         var lastNum = 0;
+        var players = [];
+        var gameHistory = [];
+        var currentPlayerIndex = 0;
+        var currentPlayerScores = { Player: '', Points: [] };
         function getNum() {
             document.getElementById('lastNum').innerHTML = lastNum;
             let dice1 = getRandomInt(4);
@@ -83,6 +155,7 @@
             }
             document.getElementById('currentNum').innerHTML = ran;
             lastNum = ran;
+            setScore(ran);
         }
 
         function getRandomInt(max) {
@@ -98,6 +171,89 @@
                 return '. &ensp; . &ensp; .';
             } else {
                 return '';
+            }
+        }
+        function setScore(ran) {
+            currentPlayerScores.Points.push(ran);
+            if (countiuePoints.findIndex(r => r == ran) < 0) {
+                if (currentPlayerIndex + 1 == players.length) {
+                    currentPlayerIndex = 0;
+                } else {
+                    currentPlayerIndex++;
+                }
+                gameHistory.push(currentPlayerScores);
+                document.getElementById('history').textContent = JSON.stringify(gameHistory, undefined, 2);
+                currentPlayerScores = { Player: players[currentPlayerIndex], Points: [] };
+            }
+            setPoints();
+        }
+        function resetLastPlayerScore() {
+            if (currentPlayerScores.Points.length > 0) {
+                if (confirm('Current player points clear?')) {
+                    currentPlayerScores.Points = [];
+                }
+            } else {
+                if (confirm('Last player points remove from history?')) {
+                    gameHistory.pop();
+                    document.getElementById('history').textContent = JSON.stringify(gameHistory, undefined, 2);
+                    if (currentPlayerIndex === 0) {
+                        currentPlayerIndex = players.length - 1;
+                    } else {
+                        currentPlayerIndex--;
+                    }
+                    currentPlayerScores = { Player: players[currentPlayerIndex], Points: [] };
+                }
+            }
+            setPoints();
+        }
+
+        function removeLast() {
+            if (currentPlayerScores.Points.length > 0) {
+                if (confirm('Do you want to remove last point?')) {
+                    currentPlayerScores.Points.pop();
+                    setPoints();
+                }
+            }
+        }
+        function add(ele) {
+            if (event.key === 'Enter') {
+                addPlayer();
+            }
+        }
+        function addPlayer() {
+            if (players.length >= 6) {
+                alert('Can not add more than 6 players!');
+                return;
+            }
+            let name = document.getElementById('playerName');
+            if (name.value !== '') {
+                players.push(name.value);
+                name.value = '';
+                setPlayersList();
+            } else { alert('Please enter player name!'); }
+        }
+        function removePlayer() {
+            players.pop();
+            setPlayersList();
+        }
+        function startGame() {
+            if (players.length >= 2) {
+                document.getElementById('playerSetup').style = 'display:none;';
+                currentPlayerScores.Player = players[0];
+                setPoints();
+            } else { alert('Please add atleast 2 Players!'); }
+        }
+        function setPoints() {
+            console.log(JSON.stringify(currentPlayerScores));
+            document.getElementById('currentPlayer').innerHTML = JSON.stringify(currentPlayerScores);
+        }
+        function setPlayersList() {
+            let ol = document.getElementById('playerList');
+            ol.innerHTML = '';
+            for (let i = 0; i < players.length; i++) {
+                let li = document.createElement('li');
+                li.innerHTML = players[i];
+                ol.appendChild(li);
             }
         }
     </script>
