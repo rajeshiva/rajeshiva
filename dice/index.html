@@ -15,7 +15,7 @@
         }
 
         .show {
-            height: 66%;
+            height: 70%;
         }
 
         .run {
@@ -24,6 +24,7 @@
             text-transform: uppercase;
             font-weight: bold;
             font-family: sans-serif;
+            margin-top: 10px;
         }
 
         #lastNum {
@@ -41,16 +42,23 @@
 
         .dots {
             text-align: center;
-            margin: 40px 20px;
+            margin: 30px 20px;
             height: 72px;
             border: 1px solid;
             font-family: cursive;
             line-height: 0px;
         }
 
+        .currentPlayer {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
         .history {
-            height: 35%;
+            height: 30%;
             overflow: auto;
+            padding: 5px;
+            margin-bottom: 15px;
         }
 
         button.removeLast {
@@ -103,6 +111,11 @@
         </div>
     </div>
     <div class="show">
+        <div class="currentPlayer">
+            <pre id="currentPlayer">
+
+            </pre>
+        </div>
         <div class="history">
             <pre id="history"></pre>
         </div>
@@ -118,11 +131,6 @@
                 -
             </div>
         </div>
-    </div>
-    <div class="currentPlayer">
-        <pre id="currentPlayer">
-
-        </pre>
     </div>
     <div class="buttons">
         <button class="reset" onclick="resetLastPlayerScore()">
@@ -182,7 +190,8 @@
                     currentPlayerIndex++;
                 }
                 gameHistory.push(currentPlayerScores);
-                document.getElementById('history').textContent = JSON.stringify(gameHistory, undefined, 2);
+                // document.getElementById('history').textContent = JSON.stringify(gameHistory, undefined, 2);
+                setHistory();
                 currentPlayerScores = { Player: players[currentPlayerIndex], Points: [] };
             }
             setPoints();
@@ -195,7 +204,8 @@
             } else {
                 if (confirm('Last player points remove from history?')) {
                     gameHistory.pop();
-                    document.getElementById('history').textContent = JSON.stringify(gameHistory, undefined, 2);
+                    // document.getElementById('history').textContent = JSON.stringify(gameHistory, undefined, 2);
+                    setHistory();
                     if (currentPlayerIndex === 0) {
                         currentPlayerIndex = players.length - 1;
                     } else {
@@ -245,7 +255,7 @@
         }
         function setPoints() {
             console.log(JSON.stringify(currentPlayerScores));
-            document.getElementById('currentPlayer').innerHTML = JSON.stringify(currentPlayerScores);
+            document.getElementById('currentPlayer').innerHTML = currentPlayerScores.Player + ' --> ' + JSON.stringify(currentPlayerScores.Points);
         }
         function setPlayersList() {
             let ol = document.getElementById('playerList');
@@ -255,6 +265,13 @@
                 li.innerHTML = players[i];
                 ol.appendChild(li);
             }
+        }
+        function setHistory() {
+            let history = '';
+            for (let i = gameHistory.length - 1; i >= 0; i--) {
+                history += gameHistory[i].Player + ' --> ' + JSON.stringify(gameHistory[i].Points) + '<br>';
+            }
+            document.getElementById('history').innerHTML = history;
         }
     </script>
 </body>
