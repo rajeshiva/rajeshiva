@@ -151,19 +151,37 @@
         var gameHistory = [];
         var currentPlayerIndex = 0;
         var currentPlayerScores = { Player: '', Points: [] };
+        let roll = [];
         function getNum() {
             document.getElementById('lastNum').innerHTML = lastNum;
-            let dice1 = getRandomInt(4);
-            let dice2 = getRandomInt(4);
-            document.getElementById('dice1').innerHTML = getDicePoints(dice1);
-            document.getElementById('dice2').innerHTML = getDicePoints(dice2);
-            let ran = dice1 + dice2;
-            if (ran == 0) {
-                ran = 12;
+            let rand = getRandomInt(10);
+            let point = 0;
+            rand = rand < 5 ? 5 : rand;
+            // for (i = 0; i < rand; i++) {
+            //     point = runDice();
+            // }
+            while (roll.length < rand) {
+                point = runDice();
             }
-            document.getElementById('currentNum').innerHTML = ran;
-            lastNum = ran;
-            setScore(ran);
+            roll = [];
+            document.getElementById('currentNum').innerHTML = point;
+            lastNum = point;
+            setScore(point);
+        }
+
+        function runDice() {
+            setTimeout(() => {
+                let dice1 = getRandomInt(4);
+                let dice2 = getRandomInt(4);
+                document.getElementById('dice1').innerHTML = getDicePoints(dice1);
+                document.getElementById('dice2').innerHTML = getDicePoints(dice2);
+                let ran = dice1 + dice2;
+                if (ran == 0) {
+                    ran = 12;
+                }
+                roll.push(ran);
+                return ran;
+            }, 50)
         }
 
         function getRandomInt(max) {
