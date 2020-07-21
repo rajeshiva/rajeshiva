@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1594553343111,
+  "timestamp": 1595332742321,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,11 +13,11 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.38de108c189b6e136a7b.js",
+        "/main.1aab2337a3897bcb1120.js",
         "/manifest.webmanifest",
         "/polyfills.a4021de53358bb0fec14.js",
         "/runtime.e227d1a0e31cbccbf8ec.js",
-        "/styles.48f7f6a5f96ceab277f1.css"
+        "/styles.9579b5e60f7e538fc446.css"
       ],
       "patterns": []
     },
@@ -37,7 +37,7 @@
         "/assets/icons/icon-192x192.png",
         "/assets/icons/icon-384x384.png",
         "/assets/icons/icon-512x512.png",
-        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-75x75.png",
         "/assets/icons/icon-96x96.png",
         "/assets/icons/tractor330x330.png"
       ],
@@ -54,16 +54,16 @@
     "/assets/icons/icon-192x192.png": "01e90e018f9d3b140e224a96983f88dfb4bdc8f3",
     "/assets/icons/icon-384x384.png": "0b38a26121d3e63d9c5751d99c100da8600c0ba7",
     "/assets/icons/icon-512x512.png": "01c5dceaff821921f8b111283be657024b2d5158",
-    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-75x75.png": "820f66aa15fc172baffe99815c609aaf5af1bc8c",
     "/assets/icons/icon-96x96.png": "ebdc00c595d9900925beca587765b7b612cd6485",
     "/assets/icons/tractor330x330.png": "95583a6bb689ee0690558b70db1f059ed7f06295",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "e20bdd1b022c002a6af053a5c54776dabe26d5d1",
-    "/main.38de108c189b6e136a7b.js": "d2bd5bc6bb1a7193682d78ed9452eb3327b38305",
+    "/index.html": "c4106a561d8ac2af31d6be397d244bfd2072ba31",
+    "/main.1aab2337a3897bcb1120.js": "8f9c949b9a04c8abc593cf9697bbafc482705e9c",
     "/manifest.webmanifest": "31f954b042ada757953210c0a7c6a2f504629197",
     "/polyfills.a4021de53358bb0fec14.js": "b47435a9ef2a4829f2f9dfd35599bde3614981b1",
     "/runtime.e227d1a0e31cbccbf8ec.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "/styles.48f7f6a5f96ceab277f1.css": "10dd1e48e60de156c64efca68b6389ec02fde88e"
+    "/styles.9579b5e60f7e538fc446.css": "11abefb0ed6a2dab6ad3c5d9fcf68683952592a4"
   },
   "navigationUrls": [
     {
